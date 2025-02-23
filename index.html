@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>AARR DM</title>
+    <meta name="description" content="グループDMツールです">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FF0000">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="AARR DM">
+    <meta property="og:description" content="DMツールです">
+    <meta property="og:site_name" content="荒らし連合軍">
+    <meta property="og:image" content="https://i.imgur.com/JTkB9AC.png">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #status {
+            width: 100%;
+            height: 150px;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #333;
+            color: white;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+        <h1>Mass Group Manager</h1>
+<label for="token">トークン:</label>
+<input type="text" id="token" name="token" required placeholder="トークンを入力">
+<button type="button" onclick="copyToClipboard('token')">コピー</button>
+
+<label for="groupId">グループID (作成/メッセージ送信/アイコン変更/名前変更):</label>
+<textarea id="groupId" name="groupId" rows="10" placeholder="改行で区切ってグループIDを入力"></textarea>
+<button type="button" onclick="copyToClipboard('groupId')">コピー</button>
+
+ <label for="baseNames">グループ名 (作成/変更) カンマ区切りで入力で複数指定可能:</label>
+<input type="text" id="baseNames" name="baseNames">
+<button type="button" onclick="createGroups()">グループ作成 (レートリミット10回/10分)</button>
+<button type="button" onclick="changeGroupNames()">グループ名変更</button>
+
+<label for="iconUrl">アイコン画像URL (jpg/png):</label>
+<input type="text" id="iconUrl" name="iconUrl">
+
+<button type="button" onclick="changeGroupIcons()">グループアイコン変更</button>
+        <label for="message">送信メッセージ:</label>
+        <input type="text" id="message" name="message">
+
+        <label for="delay">メッセージ送信の遅延 (秒):</label>
+        <input type="number" id="delay" name="delay" value="1" min="0.1" step="0.1">
+
+        <button type="button" onclick="sendMessage()">メッセージ送信</button>
+    
+<label for="userIds">ユーザーID (ユーザー追加):</label>
+<textarea id="userIds" name="userIds" rows="10" placeholder="改行で区切ってユーザーIDを入力"></textarea>
+
+<label for="modifyGroupId">グループID (ユーザー追加):</label>
+<textarea id="modifyGroupId" name="modifyGroupId" rows="10" class="textOutput" placeholder="改行で区切ってグループIDを入力"></textarea>
+<button type="button" onclick="copyToClipboard('modifyGroupId')">コピー</button>
+<p>⚠️ユーザー追加後に自動削除</p>
+
+        
+
+        <label for="startDelay">ユーザー追加開始までの時間 (分後):</label>
+        <input type="number" id="startDelay" name="startDelay" value="0" min="0">
+
+        <button type="button" onclick="copyToClipboard('userIds')">コピー</button>
+        <button type="button" onclick="addUsers()">ユーザー追加 (レートリミット10回/120秒)</button>
+        <p>⚠️追加は夜間推奨</p>  
+
+<label for="kickuserIds">ユーザーID (ユーザーキック):</label>
+<textarea id="kickuserIds" name="kickuserIds" rows="10" placeholder="改行で区切ってユーザーIDを入力"></textarea>
+<label for="kickGroupId">グループID (ユーザーキック):</label>
+<textarea id="kickGroupId" name="kickGroupId" rows="10" class="textOutput" placeholder="改行で区切ってグループIDを入力"></textarea>
+<button type="button" onclick="copyToClipboard('kickGroupId')">コピー</button>
+<p>⚠️ユーザーキック後に自動削除</p>
+            <br>
+        <button type="button" onclick="kickUsers()">ユーザーキック (使用する際は注意)</button>
+        <br>
+
+
+        <br>
+     <br>
+
+        
+        <br>
+        <button id="fetchGroupIds">Group IDを自動取得</button>
+
+        <textarea id="groupIdsBox" name="groupIdsBox" rows="10" class="textOutput" placeholder="出力結果"></textarea>
+        <button type="button" onclick="copyToClipboard('fetchGroupIds')">コピー</button>
+        <p>⚠️取得するグループ数が多過ぎるとdiscordのAPIが応答出来ない可能性があります</p>
+
+        <div class="dividing">
+        <p class="sectionTitle">フレンド招待URL</p>
+        <button type="button" class="sectionButton" id="createFriendInvite">リンク作成</button>
+        </div>
+        <div class="dividing">
+    <input type="text" id="friendInviteUrl" class="textOutput" readonly>
+    <button type="button" class="sectionButton" onclick="copyToClipboard('friendInviteUrl')">コピー</button>
+</div>
+    </form>
+
+    <p id="status">ステータス: 準備完了</p>
+
+    <ul id="errorLog"></ul>
+
+    <script src="script.js"></script>
+   
+
+
+</body>
+</html>
