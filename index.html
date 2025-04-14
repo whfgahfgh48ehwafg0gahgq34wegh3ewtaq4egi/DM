@@ -29,11 +29,13 @@
     </style>
 </head>
 <body>
-        <h1>Mass Group Manager</h1>
+        <h1>AARR Mass Group Raider</h1>
+グループ荒らしツール
+            <h3>主要設定</h3>
 <label for="token">トークン:</label>
 <input type="text" id="token" name="token" required placeholder="トークンを入力">
 <button type="button" onclick="copyToClipboard('token')">コピー</button>
-
+            <h3>グループ作成設定</h3>
 <label for="groupId">グループID (作成/メッセージ送信/アイコン変更/名前変更):</label>
 <textarea id="groupId" name="groupId" rows="10" placeholder="改行で区切ってグループIDを入力"></textarea>
 <button type="button" onclick="copyToClipboard('groupId')">コピー</button>
@@ -41,12 +43,23 @@
  <label for="baseNames">グループ名 (作成/変更) カンマ区切りで入力で複数指定可能:</label>
 <input type="text" id="baseNames" name="baseNames">
 <button type="button" onclick="createGroups()">グループ作成 (レートリミット10回/10分)</button>
-<button type="button" onclick="changeGroupNames()">グループ名変更</button>
+            <h3>グループ名変更設定</h3>
+    <label for="changeCount">1個毎のグループ名変更を繰り返す回数 (1個毎):</label>
+    <input type="number" id="changeCount" name="changeCount" value="3" min="1">
 
+    <label for="repeatCount">全グループ名変更を繰り返す回数 (全グループ毎):</label>
+    <input type="number" id="repeatCount" name="repeatCount" value="1" min="1">
+
+    <label for="repeatInterval">全グループ名変更の繰り返し間隔 (分) (全グループ毎):</label>
+    <input type="number" id="repeatInterval" name="repeatInterval" value="60" min="1">
+    
+<button type="button" onclick="changeGroupNames()">グループ名変更</button>
+            <h3>グループアイコン変更設定</h3>
 <label for="iconUrl">アイコン画像URL (jpg/png):</label>
 <input type="text" id="iconUrl" name="iconUrl">
 
 <button type="button" onclick="changeGroupIcons()">グループアイコン変更</button>
+            <h3>メッセージ送信設定</h3>
         <label for="message">送信メッセージ:</label>
         <input type="text" id="message" name="message">
 
@@ -54,7 +67,7 @@
         <input type="number" id="delay" name="delay" value="1" min="0.1" step="0.1">
 
         <button type="button" onclick="sendMessage()">メッセージ送信</button>
-    
+            <h3>ユーザー追加設定</h3>
 <label for="userIds">ユーザーID (ユーザー追加):</label>
 <textarea id="userIds" name="userIds" rows="10" placeholder="改行で区切ってユーザーIDを入力"></textarea>
 
@@ -69,9 +82,10 @@
         <input type="number" id="startDelay" name="startDelay" value="0" min="0">
 
         <button type="button" onclick="copyToClipboard('userIds')">コピー</button>
-        <button type="button" onclick="addUsers()">ユーザー追加 (レートリミット10回/120秒)</button>
+        <button type="button" onclick="addUsers()">ユーザー追加 (レートリミット10回/110秒)</button>
         <p>⚠️追加は夜間推奨</p>  
 
+            <h3>ユーザーキック設定</h3>
 <label for="kickuserIds">ユーザーID (ユーザーキック):</label>
 <textarea id="kickuserIds" name="kickuserIds" rows="10" placeholder="改行で区切ってユーザーIDを入力"></textarea>
 <label for="kickGroupId">グループID (ユーザーキック):</label>
@@ -81,13 +95,9 @@
             <br>
         <button type="button" onclick="kickUsers()">ユーザーキック (使用する際は注意)</button>
         <br>
-
-
-        <br>
-     <br>
-
         
         <br>
+           <h3>グループ自動取得設定</h3>
         <button id="fetchGroupIds">Group IDを自動取得</button>
 
         <textarea id="groupIdsBox" name="groupIdsBox" rows="10" class="textOutput" placeholder="出力結果"></textarea>
